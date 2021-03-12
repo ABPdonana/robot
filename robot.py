@@ -37,11 +37,9 @@ class Robot:
         return generacion in ("A", "B", "M")
 
     def __init__(self, alias, generacion):
-        if alias == "":
-            raise ValueError("El alias no puede ser un campo vacío")
         Robot.__numero_serie += 1
         self.__numero_serie = Robot.__numero_serie
-        self.__alias_robot = alias
+        self.__set_alias(alias)
         self.set_generacion(generacion)
         self.__brujula = Brujula()
         self.__direccion_robot = self.__brujula.punto_aleatorio()
@@ -74,6 +72,13 @@ class Robot:
     def __codigo(self):
         return self.__generacion() + str(self.__numero())
 
+    def __set_alias(self, alias):
+        if not isinstance(alias, str):
+            raise TypeError("El alias no es una cadena")
+        if alias == "":
+            raise ValueError("El alias no puede ser un campo vacío")
+        self.__alias_robot = alias
+
     def set_generacion(self, generacion):
         if not Robot.es_generacion_valida(generacion):
             raise ValueError("La generacion no es válida")
@@ -100,7 +105,7 @@ class Robot:
         self.__cambiar_posicion(metros)
 
     def saludar(self):
-        print(self.__codigo() + "" + self.__alias(), ": ¡Hola cachocarne!")
+        print(self.__codigo() + " " + self.__alias(), ": ¡Hola cachocarne!")
 
     def informacion(self):
         print("Nombre =", self.__alias(),\
