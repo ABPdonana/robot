@@ -46,7 +46,7 @@ class Robot:
         self.__brujula = Brujula()
         self.__direccion_robot = self.__brujula.punto_aleatorio()
         self.__distancia_recorrida = 0
-        self.__posicion_robot = {"N": 0, "E": 0, "S": 0, "O": 0}
+        self.__posicion_robot = [0, 0]
 
     def __eq__(self, otro):
         if not isinstance(otro, type(self)):
@@ -83,7 +83,14 @@ class Robot:
         self.__distancia_recorrida += metros
 
     def __cambiar_posicion(self, metros):
-        self.__posicion()[self.__direccion()] += metros
+        if self.__direccion() == "N":
+            self.__posicion()[0] += metros
+        if self.__direccion() == "S":
+            self.__posicion()[0] -= metros
+        if self.__direccion() == "E":
+            self.__posicion()[1] += metros
+        if self.__direccion() == "O":
+            self.__posicion()[1] -= metros
 
     def girar(self):
         self.__direccion_robot = self.__brujula.derecha(self.__direccion())
@@ -99,10 +106,8 @@ class Robot:
         print("Nombre =", self.__alias(),\
               "\nOrientacion =", self.__direccion(),\
               "\nDistancia Total Recorrida =", self.__distancia(),\
-              "\nPosición: N =", self.__posicion()["N"],\
-                          "E =", self.__posicion()["E"],\
-                          "S =", self.__posicion()["S"],\
-                          "O =", self.__posicion()["O"])
+              "\nPosición: X =", self.__posicion()[0],\
+                          "Y =", self.__posicion()[1])
 
 robot1 = Robot("Bender", "B")
 robot1.saludar()
