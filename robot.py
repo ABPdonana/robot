@@ -51,6 +51,13 @@ class Robot:
             return NotImplemented
         return self.__numero() == otro.__numero()
 
+    def __str__(self):
+        return "Nombre = " + self.__alias() + \
+              "\nOrientacion = " + self.__direccion() + \
+              "\nDistancia Total Recorrida = " + str(self.__distancia()) + \
+              "\nPosición: X = " + str(self.__posicion()[0]) + \
+                          " Y = " + str(self.__posicion()[1])
+
     def __numero(self):
         return self.__numero_serie
 
@@ -107,17 +114,10 @@ class Robot:
     def saludar(self):
         print(self.__codigo() + " " + self.__alias(), ": ¡Hola cachocarne!")
 
-    def informacion(self):
-        print("Nombre =", self.__alias(),\
-              "\nOrientacion =", self.__direccion(),\
-              "\nDistancia Total Recorrida =", self.__distancia(),\
-              "\nPosición: X =", self.__posicion()[0],\
-                          "Y =", self.__posicion()[1])
-
 robot1 = Robot("Bender", "B")
 robot1.saludar()
-robot1.informacion()
+print(robot1)
 robot1.avanzar()
 robot1.girar()
 robot1.avanzar(-5)
-robot1.informacion()
+print(robot1)
