@@ -96,7 +96,7 @@ class Robot:
         self.__direccion_robot = self.__brujula.derecha(self.__direccion())
 
     def avanzar(self, metros = 1):
-        self.__anyadir_distancia(metros)
+        self.__anyadir_distancia(abs(metros))
         self.__cambiar_posicion(metros)
 
     def saludar(self):
@@ -114,5 +114,5 @@ robot1.saludar()
 robot1.informacion()
 robot1.avanzar()
 robot1.girar()
-robot1.avanzar(5)
+robot1.avanzar(-5)
 robot1.informacion()
